@@ -27,7 +27,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import GameInform from '../assets/game.json'
+import GameInform from '../assets/json/game.json'
 
 const router = useRouter()
 
@@ -111,8 +111,7 @@ const moveHome = () => {
 */
 const controlPiece = (event, row, column) => {
     // console.log(event.target.id);
-    ruler()
-
+    
     if(gameFlag.value) {
         var now = nowPlayer.value[0]
 
@@ -133,6 +132,8 @@ const controlPiece = (event, row, column) => {
             setImage()
         }
     }
+
+    ruler()
 }
 
 /* 
