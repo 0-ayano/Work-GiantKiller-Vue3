@@ -1,0 +1,114 @@
+@import './base.css';
+
+#table{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.square {
+    width: 60px;
+    margin: 5px 5px 5px 5px;
+    aspect-ratio: 1;
+    text-align: center;
+    border: 2px solid var(--color-bule);
+    background-color: var(--color-alice_blue);
+    background-size: contain;
+}
+
+.square_b1 {
+    width: 60px;
+    margin: 5px 5px 5px 5px;
+    aspect-ratio: 1;
+    text-align: center;
+    border: 2px solid var(--color-bule);
+    background: url(../assets/img/b1.png) no-repeat;
+    background-color: var(--color-alice_blue);
+    background-size: contain;
+    background-position: center center;
+}
+
+.square_b2 {
+    width: 60px;
+    margin: 5px 5px 5px 5px;
+    aspect-ratio: 1;
+    text-align: center;
+    border: 2px solid var(--color-bule);
+    background: url(../assets/img/b2.png) no-repeat;
+    background-color: var(--color-alice_blue);
+    background-size: contain;
+    background-position: center center;
+}
+
+.square_b3 {
+    width: 60px;
+    margin: 5px 5px 5px 5px;
+    aspect-ratio: 1;
+    text-align: center;
+    border: 2px solid var(--color-bule);
+    background: url(../assets/img/b3.png) no-repeat;
+    background-color: var(--color-alice_blue);
+    background-size: contain;
+    background-position: center center;
+}
+
+.square_b4 {
+    width: 60px;
+    margin: 5px 5px 5px 5px;
+    aspect-ratio: 1;
+    text-align: center;
+    border: 2px solid var(--color-bule);
+    background: url(../assets/img/b4.png) no-repeat;
+    background-color: var(--color-alice_blue);
+    background-size: contain;
+    background-position: center center;
+}
+
+.square_w1 {
+    width: 60px;
+    margin: 5px 5px 5px 5px;
+    aspect-ratio: 1;
+    text-align: center;
+    border: 2px solid var(--color-bule);
+    background: url(../assets/img/w1.png) no-repeat;
+    background-color: var(--color-alice_blue);
+    background-size: contain;
+    background-position: center center;
+}
+
+.square_w2 {
+    width: 60px;
+    margin: 5px 5px 5px 5px;
+    aspect-ratio: 1;
+    text-align: center;
+    border: 2px solid var(--color-bule);
+    background: url(../assets/img/w2.png) no-repeat;
+    background-color: var(--color-alice_blue);
+    background-size: contain;
+    background-position: center center;
+}
+
+.square_w3 {
+    width: 60px;
+    margin: 5px 5px 5px 5px;
+    aspect-ratio: 1;
+    text-align: center;
+    border: 2px solid var(--color-bule);
+    background: url(../assets/img/w3.png) no-repeat;
+    background-color: var(--color-alice_blue);
+    background-size: contain;
+    background-position: center center;
+}
+
+.square_w4 {
+    width: 60px;
+    margin: 5px 5px 5px 5px;
+    aspect-ratio: 1;
+    text-align: center;
+    border: 2px solid var(--color-bule);
+    background: url(../assets/img/w4.png) no-repeat;
+    background-color: var(--color-alice_blue);
+    background-size: contain;
+    background-position: center center;
+}

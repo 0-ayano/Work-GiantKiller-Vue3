@@ -1,0 +1,10 @@
+/* color palette from <https://github.com/vuejs/theme> */
+
+:root {
+	--color-black: #323232;
+	--color-white: #fefefe;
+	--color-orange: #ecba89;
+	--color-bule: #b2cde2;
+	--color-alice_blue: #e5f4f9;
+	--color-wisp_pink: #f9eae5;
+}
