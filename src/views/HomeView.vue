@@ -1,7 +1,7 @@
 <template>
 	<h1 id="title">Giant Killer</h1>
 
-	<button id="btn" class="move-nomalplay" @click="moveNomalPlay()">Nomal　Play</button>
+	<button id="btn" class="move-nomalplay" @click="moveNomalPlay()">Nomal Play</button>
 	<button id="btn" class="move-rule" @click="moveRule()">Rule</button>
 </template>
 
