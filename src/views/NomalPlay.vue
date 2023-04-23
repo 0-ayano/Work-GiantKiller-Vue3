@@ -18,8 +18,7 @@
         <div v-if = "whiteScore >= 15">Winner White</div>
     </div>
 
-    <button  
-        v-if = "!gameFlag" id = "btn" class = "game-again" @click = "gameAgain()">One More</button>
+    <button v-if = "!gameFlag" id = "btn" class = "game-again" @click = "gameAgain()">One More</button>
     <button id = "btn" class = "move-home" @click = "moveHome()">Home</button>
     <button id = "btn" class = "game-resign" @click = "gameResign()">Resign</button>
 </template>
@@ -53,7 +52,7 @@ const squareId = ref(
     ["", "", "", "", "", "", "", ""]
 )
 
-const gameboard = ref( GameInform.game )
+const gameboard = ref( )
 
 const moveOK = ref([])
 
@@ -64,6 +63,8 @@ const whiteScore = ref(0)
 const blackScore = ref(0)
 
 const nowPlayer = ref("white")
+
+const addTurn = ref(0)
 
 const gameFlag = ref(true)
 
@@ -87,6 +88,7 @@ onMounted(() => {
     }
     squareId.value = arr1
     squareImg.value = arr2
+    gameboard.value = GameInform.game;
     setImage()
     console.log("[succeed] Set square id")
 })
@@ -302,24 +304,32 @@ const movePiece = (ID, afterX, afterY) => {
             var beforeP = gameboard.value[beforeX][beforeY]
             var afterP  =  gameboard.value[afterX][afterY]
 
+            // [スキル]
+
             // [同士討ち]白
             if (beforeP > 0 && afterP > 0) {
                 manageScore("b", afterP+beforeP)
                 gameboard.value[afterX][afterY] = 0
                 gameboard.value[beforeX][beforeY] = 0
+
+                // nowPlayerの更新
+                updateNowPlayer()
             }
 
             // [同士討ち]黒
             else if (beforeP < 0 && afterP < 0) {
-                manageScore("w", afterP+beforeP)
+                manageScore("w", Math.abs(afterP+beforeP))
                 gameboard.value[afterX][afterY] = 0
                 gameboard.value[beforeX][beforeY] = 0
+
+                // nowPlayerの更新
+                updateNowPlayer()
             }
 
             // [獲る]進化
             else if (beforeP + afterP == 0) {
                 if (moveAfterData.value[0] == 4) {
-                    manageScore("w", -4)
+                    manageScore("w", 4)
                     gameboard.value[afterX][afterY] = 4
                     gameboard.value[beforeX][beforeY] = 0
                 }
@@ -331,7 +341,7 @@ const movePiece = (ID, afterX, afterY) => {
                 }
 
                 else if (moveAfterData.value[0] > 0) {
-                    manageScore("w", afterP)
+                    manageScore("w", Math.abs(afterP))
                     gameboard.value[afterX][afterY] = moveAfterData.value[0] + 1
                     gameboard.value[beforeX][beforeY] = 0
                 }
@@ -341,12 +351,14 @@ const movePiece = (ID, afterX, afterY) => {
                     gameboard.value[afterX][afterY] = moveAfterData.value[0] - 1
                     gameboard.value[beforeX][beforeY] = 0
                 }
+
+                manageAddTurn()
             }
 
             // [獲る]通常
             else if (beforeP + afterP != beforeP) {
                 if (moveAfterData.value[0] > 0) {
-                    manageScore("w", afterP)
+                    manageScore("w", Math.abs(afterP))
                     gameboard.value[afterX][afterY] = moveAfterData.value[0]
                     gameboard.value[beforeX][beforeY] = 0
                 }
@@ -356,23 +368,18 @@ const movePiece = (ID, afterX, afterY) => {
                     gameboard.value[afterX][afterY] = moveAfterData.value[0]
                     gameboard.value[beforeX][beforeY] = 0
                 }
+
+                manageAddTurn()
             }
 
             // 進行
             else {
                 gameboard.value[afterX][afterY] = moveAfterData.value[0]
                 gameboard.value[beforeX][beforeY] = 0
-            }
 
-            // nowPlayerの更新
-            if (nowPlayer.value == "white") {
-                nowPlayer.value = "black"
+                // nowPlayerの更新
+                updateNowPlayer()
             }
-            else {
-                nowPlayer.value = "white"
-            }
-
-            console.log("[succeed] Moved")
         }
     }
 }
@@ -413,6 +420,40 @@ const gameResign = () => {
 }
 
 /* 
+    関数名：updateNowPlayer
+    引数　：
+    返り値：
+    説明　：ターンの更新
+*/
+const updateNowPlayer = () => {
+    if (nowPlayer.value == "white") {
+        nowPlayer.value = "black"
+    }
+    else {
+        nowPlayer.value = "white"
+    }
+
+    console.log("[succeed] Moved")
+}
+
+/*
+    関数名：manageAddTurn
+    引数　：
+    返り値：
+    説明　：追加ターンの回数制御
+*/
+const manageAddTurn = () => {
+    if (addTurn.value < 2) {
+        addTurn.value  += 1
+    }
+
+    else {
+        addTurn.value = 0
+        updateNowPlayer()
+    }
+}
+
+/* 
     関数名：manageScore
     引数　：who, point
     返り値：
@@ -424,7 +465,7 @@ const manageScore = (who, point) => {
     }
 
     else if (who == "w") {
-        whiteScore.value = whiteScore.value + Math.abs(point)
+        whiteScore.value = whiteScore.value + point
     }
 }
 
